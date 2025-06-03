@@ -1,1 +1,154 @@
-# Active-Directory-
+# Active-Directory lab using VirtualBox
+This guide walks you through setting up an isolated lab environment using VirtualBox to install a Windows Server Domain Controller and a Windows 10/11 client joined to the domain.
+
+
+# Overview
+You will:
+
+- Set up VirtualBox networking
+- Install Windows Server (for Domain Controller)
+- Promote the server to a Domain Controller (Active Directory)
+- Set up a Windows Client (Windows 10/11)
+- Join the client to the domain
+- Apply basic GPO
+
+
+##  Step 1: Configure VirtualBox Network
+
+### 🧰Create Internal Network
+
+1. Open VirtualBox → `File` → `Host Network Manager`
+2. Click `Create`. Enable **DHCP** if desired
+3. Alternatively, configure each VM's `Adapter 1` as **Internal Network** named (LabNet)
+
+
+## Step 2: Create the Windows Server VM (DC01)
+
+### VM Settings
+
+- **Name**: `DC01`
+- **Type**: Microsoft Windows
+- **Version**: Windows 2019 or 2022 (64-bit)
+- **RAM**: 4+ GB  
+- **CPU**: 2 cores  
+- **HDD**: 60 GB (VDI, dynamically allocated)
+
+### ISO Attachment
+
+- Mount the Windows Server ISO in the optical drive (you can find this by a quick search on google)
+
+### Network Settings
+
+- **Adapter 1**: Internal Network (`LabNet`)
+
+Install the OS after booting.
+
+
+## Step 3: Configure Windows Server
+
+1. Set a strong **Administrator** password
+2. **Configure Static IP**:
+
+          IP Address: 192.168.1.10
+          
+          Subnet: 255.255.255.0
+          
+          Gateway: 192.168.1.1 (optional)
+          
+          DNS: 127.0.0.1
+
+3. **Rename the Computer**:
+
+Server Manager → Local Server → Computer Name → Change → DC01
+
+
+## Step 4: Install Active Directory Domain Services
+  1. Open Server Manager
+
+  2. Click Manage → Add Roles and Features
+
+  3. Follow the wizard:
+
+    Installation Type: Role-based
+
+    Server Selection: Local server
+
+    Roles: Check Active Directory Domain Services
+
+    Accept features prompt
+
+    Finish and restart if needed
+
+
+
+## Step 5: Promote to Domain Controller
+1. Back in Server Manager, click the notification flag(at the top) → Promote this server to a domain controller
+
+2. Select:
+ 
+  Add a new forest  
+  Root domain: lab.local
+
+3. Set the DSRM password
+
+4. Continue with defaults → Install
+
+## Step 6: Create a Domain User
+
+1. Open Active Directory Users and Computers
+
+2. Right-click your domain → New → User
+
+3. Example: TestUser
+
+4. Set password and uncheck "User must change password at next login"
+
+## Step 7: Create the Windows Client VM (WIN10CLIENT)
+VM Settings
+- Name: WIN10CLIENT
+
+- Type: Microsoft Windows
+
+- Version: Windows 10/11 (64-bit)
+
+- RAM: 2–4 GB
+
+- HDD: 40–60 GB
+
+ISO Attachment
+- Mount Windows 10 or 11 ISO
+
+Network Settings
+- Adapter 1: Internal Network (LabNet)
+
+
+## Step 8: Configure Windows Client
+1. Complete the Windows installation and log in
+
+2. Set Static IP:
+- IP Address: 192.168.1.20  
+- Subnet: 255.255.255.0  
+- Gateway: 192.168.1.1 (optional)  
+- DNS: 192.168.1.10 (Domain Controller IP)
+
+  ## Step 9: Join Client to Domain
+1. Go to:
+   Settings → System → About → Rename this PC (advanced)
+
+2. Click Change
+
+3. Select Domain, enter: lab.local
+
+4. Enter credentials:
+
+  - Username: Administrator  
+  - Password: This was set earlier on DC01
+5. Restart
+
+## Step 10: Log in as Domain User
+
+1. At login screen → Click Other user
+
+2. Enter:
+  - Username: testuser
+  - Password: (password you created)
