@@ -152,3 +152,36 @@ Network Settings
 2. Enter:
   - Username: testuser
   - Password: (password you created)
+
+## Applying GPOs
+
+# Step 1: Applying Basic GPOs
+
+1. Go to Server Manager
+2. Select tools, then Group Policy Management
+
+# Step 2: Create a New GPO
+
+Step 2: Create a New GPO
+
+1. Right-click lab.local (or an OU like Computers)
+
+2. Select “Create a GPO in this domain, and Link it here…”
+
+3. Name your GPO (e.g., Disable Control Panel
+
+# Step 3: Edit the GPO
+
+1. Right-click your new GPO → Edit
+
+2. Navigate using one of the following to disable control panel & password complexity for users:
+
+   - User Configuration → Administrative Templates → Control Panel → Prohibit access to Control Panel and PC settings → Set to Enabled
+
+   -  Computer Configuration → Windows Settings → Security Settings → Account Policies → password policy
+
+# step 4: apply GPO and force Update
+
+1. Run the following command to update policy from the domain "gpupdate /force"
+
+2. Check to ensure GPOs are applied "gpresult /r" 
