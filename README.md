@@ -15,7 +15,7 @@ You will:
 
 ##  Step 1: Configure VirtualBox Network
 
-### 🧰Create Internal Network
+### Create Internal Network
 
 1. Open VirtualBox → `File` → `Host Network Manager`
 2. Click `Create`. Enable **DHCP** if desired
