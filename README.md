@@ -103,6 +103,8 @@ Server Manager → Local Server → Computer Name → Change → DC01
 
 4. Set password and uncheck "User must change password at next login"
 
+![Alt Text](https://github.com/JamahdPerry99/Active-Directory-/blob/47ba64b869153639c573cb03263b4463c7e55cc0/Creating%20user.png)
+
 ## Step 7: Create the Windows Client VM (WIN10CLIENT)
 VM Settings
 - Name: WIN10CLIENT
