@@ -133,6 +133,8 @@ Network Settings
 - Gateway: 192.168.1.1 (optional)  
 - DNS: 192.168.1.10 (Domain Controller IP)
 
+![Alt Text](https://github.com/JamahdPerry99/Active-Directory-/blob/9059b7e476444099e392dad53cf5350e2a5a2edb/setting%20up%20IP%20settings%20on%20window%20client.png)
+
   ## Step 9: Join Client to Domain
 1. Go to:
    Settings → System → About → Rename this PC (advanced)
@@ -170,7 +172,9 @@ Step 2: Create a New GPO
 
 2. Select “Create a GPO in this domain, and Link it here…”
 
-3. Name your GPO (e.g., Disable Control Panel
+3. Name your GPO (e.g., Disable Control Panel & password complexity)
+
+![Alt Text](https://github.com/JamahdPerry99/Active-Directory-/blob/6fd471363a2eaee806303de7d33dbceab4319681/creating%20GPO%20policy%20.png)
 
 # Step 3: Edit the GPO
 
@@ -180,10 +184,19 @@ Step 2: Create a New GPO
 
    - User Configuration → Administrative Templates → Control Panel → Prohibit access to Control Panel and PC settings → Set to Enabled
 
+![Alt Text](https://github.com/JamahdPerry99/Active-Directory-/blob/cbf3b4eed605d80c1f4a293187789f28f0e78e25/Enabling%20GPO%20policy%20for%20control%20panel.png)
+
    -  Computer Configuration → Windows Settings → Security Settings → Account Policies → password policy
+
+![Alt Text](https://github.com/JamahdPerry99/Active-Directory-/blob/cbf3b4eed605d80c1f4a293187789f28f0e78e25/enabling%20password%20complexity%20on%20the%20computer%20configuration.png)
+
 
 # step 4: apply GPO and force Update
 
 1. Run the following command to update policy from the domain "gpupdate /force"
 
+![Alt Text](https://github.com/JamahdPerry99/Active-Directory-/blob/456614803f8f3ecbf650bb909aa15d131019eae1/forcing%20update%20on%20client.png)
+
 2. Check to ensure GPOs are applied "gpresult /r" 
+
+![Alt Text](https://github.com/JamahdPerry99/Active-Directory-/blob/456614803f8f3ecbf650bb909aa15d131019eae1/GPO%20on%20windows%20client.png)
